@@ -175,20 +175,10 @@
 
 @implementation SmartPayment (Reader)
 
-- (id) initWithCode:(NSString*)code configuration:(SmartPaymentConfiguration*)configuration
++ (id) smartPaymentWithCode:(NSString*)code configuration:(SmartPaymentConfiguration*)configuration
 {
-	self = [super init];
-	if (self) {
-		SmartPaymentReader * reader = [[SmartPaymentReader alloc] initWithConfiguration:configuration];
-		NSDictionary * dict = [reader paymentAttributesFromCode:code];
-		if (dict) {
-			[self readPaymentFromDictionary:dict];
-			self.isValid = [self validatePaymentWithConfiguration:configuration];
-		} else {
-			self.isValid = NO;
-		}
-	}
-	return self;
+	SmartPaymentReader * reader = [[SmartPaymentReader alloc] initWithConfiguration:configuration];
+	return [reader createPaymentFromCode:code];
 }
 
 @end

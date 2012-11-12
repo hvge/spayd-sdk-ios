@@ -37,6 +37,6 @@
 
 @interface SmartPayment (Reader)
 
-- (id) initWithCode:(NSString*)code configuration:(SmartPaymentConfiguration*)configuration;
++ (id) smartPaymentWithCode:(NSString*)code configuration:(SmartPaymentConfiguration*)configuration;
 
 @end
