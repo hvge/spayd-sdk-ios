@@ -38,6 +38,32 @@
 @synthesize dueDate = _dueDate, messageForReceiver = _messageForReceiver;
 @synthesize notificationChannel = _notificationChannel;
 
+#pragma mark - Public API
+
+- (NSArray*) allAccounts
+{
+	NSMutableArray * array = [NSMutableArray array];
+	if (_account) {
+		[array addObject:_account];
+	}
+	if (_alternateAccounts) {
+		[array addObjectsFromArray:_alternateAccounts];
+	}
+	return array;
+}
+
+- (NSArray*) allAccountsForCountry:(NSString*)ibanCountryCode
+{
+	NSArray * array = [self allAccounts];
+	NSMutableArray * result = [NSMutableArray arrayWithCapacity:array.count];
+	for (SmartPaymentAccount * account in array) {
+		if ([account.countryCode isEqualToString:ibanCountryCode]) {
+			[result addObject:account];
+		}
+	}
+	return result;
+}
+
 #pragma mark - Validation
 
 - (NSDictionary*) validationRules

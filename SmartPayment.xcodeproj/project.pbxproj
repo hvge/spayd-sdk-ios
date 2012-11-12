@@ -72,11 +72,11 @@
 		BF40928116512B49005C74F2 /* SmartPaymentReaderTestsCZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentReaderTestsCZ.m; sourceTree = "<group>"; };
 		BF4092841651361A005C74F2 /* SmartPaymentConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentConfiguration.h; sourceTree = "<group>"; };
 		BF4092851651361A005C74F2 /* SmartPaymentConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentConfiguration.m; sourceTree = "<group>"; };
+		BF40929C16515B52005C74F2 /* SmartPayment-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SmartPayment-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		BF6A594315FDEB9700ECD56C /* SmartPaymentCZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentCZ.h; sourceTree = "<group>"; };
 		BF6A594415FDEB9700ECD56C /* SmartPaymentCZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentCZ.m; sourceTree = "<group>"; };
 		BFA1F97C15F8AF290071ED58 /* libSmartPayment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSmartPayment.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA1F97F15F8AF290071ED58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		BFA1F98315F8AF290071ED58 /* SmartPayment-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartPayment-Prefix.pch"; sourceTree = "<group>"; };
 		BFA1F98D15F8AF290071ED58 /* SmartPaymentTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartPaymentTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA1F98E15F8AF290071ED58 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BFA1F99015F8AF290071ED58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -205,7 +205,7 @@
 		BFA1F98215F8AF290071ED58 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BFA1F98315F8AF290071ED58 /* SmartPayment-Prefix.pch */,
+				BF40929C16515B52005C74F2 /* SmartPayment-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -438,7 +438,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/SmartPayment.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				GCC_PREFIX_HEADER = "SmartPayment-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SmartPayment;
 				SKIP_INSTALL = YES;
@@ -450,7 +450,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/SmartPayment.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				GCC_PREFIX_HEADER = "SmartPayment-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SmartPayment;
 				SKIP_INSTALL = YES;
@@ -465,7 +465,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				GCC_PREFIX_HEADER = "SmartPayment-Prefix.pch";
 				INFOPLIST_FILE = "SmartPaymentTests/SmartPaymentTests-Info.plist";
 				PRODUCT_NAME = SmartPaymentTests;
 				WRAPPER_EXTENSION = octest;
@@ -480,7 +480,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				GCC_PREFIX_HEADER = "SmartPayment-Prefix.pch";
 				INFOPLIST_FILE = "SmartPaymentTests/SmartPaymentTests-Info.plist";
 				PRODUCT_NAME = SmartPaymentTests;
 				WRAPPER_EXTENSION = octest;

@@ -82,8 +82,10 @@
 		} else {
 			sp = nil;
 			self.error = [validator firstError];
-			NSLog(@"SmartPaymentReader: Error: %@", [_error localizedDescription]);
 		}
+	}
+	if (_error) {
+		NSLog(@"SmartPaymentReader: Error: %@", [_error localizedDescription]);
 	}
 	return sp;
 }

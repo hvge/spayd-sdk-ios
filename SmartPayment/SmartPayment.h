@@ -70,4 +70,10 @@
 // "NTA" attribute
 @property (nonatomic, strong) NSString * notificationAddress;
 
+// Returns all accounts in one array.
+- (NSArray*) allAccounts;
+
+// Returns all accounts which are valid for specific country code.
+- (NSArray*) allAccountsForCountry:(NSString*)ibanCountryCode;
+
 @end

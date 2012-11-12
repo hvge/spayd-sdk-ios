@@ -1,8 +1,7 @@
 /*
  * [/] SmartPlatba
  *
- * Copyright 2012 www.paylibo.com
- * Copyright 2012 Inmite s.r.o.
+ * Copyright 2012 www.qr-platba.cz
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +22,7 @@
 #import "SmartPaymentConfiguration.h"
 
 // The SmartPaymentCZ class implements features required for
-// domestic payments in Czech Republic and Slovakia.
+// domestic payments in Czech Republic.
 //
 // This class is also good example how to extend SmartPayment for
 // other countries.
@@ -50,7 +49,10 @@
 @property (nonatomic, strong) NSNumber * repeatDaysCount;		// X-PER, Optional, for how many days will payer try to realize payment
 
 + (SmartPaymentConfiguration*) czechConfiguration;
-+ (SmartPaymentConfiguration*) slovakConfiguration;
+
+// Returns array with accounts which has specific bank code. If bankCode parameter is nil then method
+// returns all czech bank accounts.
+- (NSArray*) czAllAccountsWithBankCode:(NSString*)bankCode;
 
 @end
 

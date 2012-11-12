@@ -25,7 +25,7 @@
 
 - (id) initWithConfiguration:(SmartPaymentConfiguration*)configuration;
 
-// Error, valid if reader failed.
+// Returns error. Value is valid only if reader failed before.
 @property (nonatomic, strong) NSError * error;
 
 - (NSDictionary*) paymentAttributesFromCode:(NSString*)code;

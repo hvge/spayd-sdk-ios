@@ -116,6 +116,23 @@
 	STAssertTrue(pay != nil, @"NT validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*NT:E"];
 	STAssertTrue(pay != nil, @"NT validation is wrong");
+	
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*WRONG:XXX"];
+	STAssertTrue(pay == nil, @"Known tags validation is wrong");
+}
+
+- (void) testAlternateAccounts
+{
+	SmartPayment * pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*ALT-ACC:CZ3208000000000000007894,CZ0908000000000353497163,AT736000000002386492"];
+	STAssertTrue(pay != nil, @"ALT-ACC validation is wrong");
+	if (pay)
+	{
+		NSArray * allAccounts = [pay allAccounts];
+		STAssertTrue(allAccounts.count == 4, @"Wrong ALT-ACC parser.");
+	}
+	
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*ALT-ACC:CZ3208000000000000007894,CZ0908000000000353497163,AT736000010002386492"];
+	STAssertTrue(pay == nil, @"ALT-ACC validation is wrong. Wrong IBAN passed over tests");
 }
 
 @end

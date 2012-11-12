@@ -1,8 +1,7 @@
 /*
  * [/] SmartPlatba
  *
- * Copyright 2012 www.paylibo.com
- * Copyright 2012 Inmite s.r.o.
+ * Copyright 2012 www.qr-platba.cz
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,13 +95,23 @@ static NSString * const kX_URL = @"X-URL";
 												  accountClass:nil];
 }
 
-+ (SmartPaymentConfiguration*) slovakConfiguration
+- (NSArray*) czAllAccountsWithBankCode:(NSString*)bankCode
 {
-	return [[SmartPaymentConfiguration alloc] initWithTimeZone:[NSTimeZone timeZoneWithName:@"CET"]
-												  currencyCode:@"EUR"
-												  paymentClass:[SmartPaymentCZ class]
-												  accountClass:nil];
+	NSArray * array = [self allAccountsForCountry:@"CZ"];
+	if (bankCode) {
+		NSMutableArray * result = [NSMutableArray arrayWithCapacity:array.count];
+		for (SmartPaymentAccount * account in array) {
+			if ([account isValidCzechBankAccount]) {
+				if ([[account czBankCode] isEqualToString:bankCode]) {
+					[result addObject:account];
+				}
+			}
+		}
+		return result;
+	}
+	return array;
 }
+
 
 @end
 
