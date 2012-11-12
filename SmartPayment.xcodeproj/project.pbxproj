@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF40927916512191005C74F2 /* SmartPaymentReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF40927816512191005C74F2 /* SmartPaymentReaderTests.m */; };
+		BF40927C1651219F005C74F2 /* SmartPaymentWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF40927B1651219F005C74F2 /* SmartPaymentWriterTests.m */; };
+		BF40927E16512377005C74F2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF40927D16512377005C74F2 /* libz.dylib */; };
+		BF40927F165123E0005C74F2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF40927D16512377005C74F2 /* libz.dylib */; };
+		BF40928216512B49005C74F2 /* SmartPaymentReaderTestsCZ.m in Sources */ = {isa = PBXBuildFile; fileRef = BF40928116512B49005C74F2 /* SmartPaymentReaderTestsCZ.m */; };
+		BF4092861651361B005C74F2 /* SmartPaymentConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4092851651361A005C74F2 /* SmartPaymentConfiguration.m */; };
+		BF4092871651361B005C74F2 /* SmartPaymentConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4092851651361A005C74F2 /* SmartPaymentConfiguration.m */; };
+		BF6A594515FDEB9700ECD56C /* SmartPaymentCZ.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A594415FDEB9700ECD56C /* SmartPaymentCZ.m */; };
+		BF6A594615FDEB9700ECD56C /* SmartPaymentCZ.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A594415FDEB9700ECD56C /* SmartPaymentCZ.m */; };
+		BFA1F98015F8AF290071ED58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA1F97F15F8AF290071ED58 /* Foundation.framework */; };
+		BFA1F98F15F8AF290071ED58 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA1F98E15F8AF290071ED58 /* SenTestingKit.framework */; };
+		BFA1F99115F8AF290071ED58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA1F99015F8AF290071ED58 /* UIKit.framework */; };
+		BFA1F99215F8AF290071ED58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA1F97F15F8AF290071ED58 /* Foundation.framework */; };
+		BFA1F99515F8AF290071ED58 /* libSmartPayment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA1F97C15F8AF290071ED58 /* libSmartPayment.a */; };
+		BFA1F99B15F8AF290071ED58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFA1F99915F8AF290071ED58 /* InfoPlist.strings */; };
+		BFA1F9A915F8B2640071ED58 /* SmartPaymentReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9A815F8B2640071ED58 /* SmartPaymentReader.m */; };
+		BFA1F9AC15F8B2810071ED58 /* SmartPaymentWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9AB15F8B2810071ED58 /* SmartPaymentWriter.m */; };
+		BFA1F9AD15F8B2810071ED58 /* SmartPaymentWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9AB15F8B2810071ED58 /* SmartPaymentWriter.m */; };
+		BFA1F9B115F8B2DE0071ED58 /* SmartPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9B015F8B2DE0071ED58 /* SmartPayment.m */; };
+		BFA1F9B215F8B2DE0071ED58 /* SmartPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9B015F8B2DE0071ED58 /* SmartPayment.m */; };
+		BFA1F9B915F8C70B0071ED58 /* SmartPaymentConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9B815F8C70B0071ED58 /* SmartPaymentConstants.m */; };
+		BFA1F9BA15F8C70B0071ED58 /* SmartPaymentConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9B815F8C70B0071ED58 /* SmartPaymentConstants.m */; };
+		BFA1F9D915FA44800071ED58 /* IBANValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9D815FA44800071ED58 /* IBANValidator.m */; };
+		BFA1F9DA15FA44800071ED58 /* IBANValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9D815FA44800071ED58 /* IBANValidator.m */; };
+		BFA1F9DD15FA56F70071ED58 /* IBANValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9DC15FA56F70071ED58 /* IBANValidatorTests.m */; };
+		BFA1F9EA15FB5A140071ED58 /* SmartPaymentAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9E915FB5A130071ED58 /* SmartPaymentAccount.m */; };
+		BFA1F9EB15FB5A140071ED58 /* SmartPaymentAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9E915FB5A130071ED58 /* SmartPaymentAccount.m */; };
+		BFA1F9F715FB80190071ED58 /* SmartPaymentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9F615FB80180071ED58 /* SmartPaymentUtils.m */; };
+		BFA1F9F815FB80190071ED58 /* SmartPaymentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA1F9F615FB80180071ED58 /* SmartPaymentUtils.m */; };
+		BFF464C0164C5AFB00C49FD3 /* SmartPaymentValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF464BF164C5AFB00C49FD3 /* SmartPaymentValidator.m */; };
+		BFF464C1164C5AFB00C49FD3 /* SmartPaymentValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF464BF164C5AFB00C49FD3 /* SmartPaymentValidator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFA1F99315F8AF290071ED58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFA1F97315F8AF290071ED58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFA1F97B15F8AF290071ED58;
+			remoteInfo = SmartPayment;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BFA1F97A15F8AF290071ED58 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BF40927716512191005C74F2 /* SmartPaymentReaderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentReaderTests.h; sourceTree = "<group>"; };
+		BF40927816512191005C74F2 /* SmartPaymentReaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentReaderTests.m; sourceTree = "<group>"; };
+		BF40927A1651219F005C74F2 /* SmartPaymentWriterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentWriterTests.h; sourceTree = "<group>"; };
+		BF40927B1651219F005C74F2 /* SmartPaymentWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentWriterTests.m; sourceTree = "<group>"; };
+		BF40927D16512377005C74F2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BF40928016512B49005C74F2 /* SmartPaymentReaderTestsCZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentReaderTestsCZ.h; sourceTree = "<group>"; };
+		BF40928116512B49005C74F2 /* SmartPaymentReaderTestsCZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentReaderTestsCZ.m; sourceTree = "<group>"; };
+		BF4092841651361A005C74F2 /* SmartPaymentConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentConfiguration.h; sourceTree = "<group>"; };
+		BF4092851651361A005C74F2 /* SmartPaymentConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentConfiguration.m; sourceTree = "<group>"; };
+		BF6A594315FDEB9700ECD56C /* SmartPaymentCZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentCZ.h; sourceTree = "<group>"; };
+		BF6A594415FDEB9700ECD56C /* SmartPaymentCZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentCZ.m; sourceTree = "<group>"; };
+		BFA1F97C15F8AF290071ED58 /* libSmartPayment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSmartPayment.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFA1F97F15F8AF290071ED58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BFA1F98315F8AF290071ED58 /* SmartPayment-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartPayment-Prefix.pch"; sourceTree = "<group>"; };
+		BFA1F98D15F8AF290071ED58 /* SmartPaymentTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartPaymentTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFA1F98E15F8AF290071ED58 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		BFA1F99015F8AF290071ED58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		BFA1F99815F8AF290071ED58 /* SmartPaymentTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartPaymentTests-Info.plist"; sourceTree = "<group>"; };
+		BFA1F99A15F8AF290071ED58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BFA1F9A715F8B2640071ED58 /* SmartPaymentReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentReader.h; sourceTree = "<group>"; };
+		BFA1F9A815F8B2640071ED58 /* SmartPaymentReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentReader.m; sourceTree = "<group>"; };
+		BFA1F9AA15F8B2810071ED58 /* SmartPaymentWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentWriter.h; sourceTree = "<group>"; };
+		BFA1F9AB15F8B2810071ED58 /* SmartPaymentWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentWriter.m; sourceTree = "<group>"; };
+		BFA1F9AF15F8B2DE0071ED58 /* SmartPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPayment.h; sourceTree = "<group>"; };
+		BFA1F9B015F8B2DE0071ED58 /* SmartPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPayment.m; sourceTree = "<group>"; };
+		BFA1F9B715F8C70B0071ED58 /* SmartPaymentConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentConstants.h; sourceTree = "<group>"; };
+		BFA1F9B815F8C70B0071ED58 /* SmartPaymentConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentConstants.m; sourceTree = "<group>"; };
+		BFA1F9D715FA44800071ED58 /* IBANValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBANValidator.h; sourceTree = "<group>"; };
+		BFA1F9D815FA44800071ED58 /* IBANValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBANValidator.m; sourceTree = "<group>"; };
+		BFA1F9DB15FA56F70071ED58 /* IBANValidatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBANValidatorTests.h; sourceTree = "<group>"; };
+		BFA1F9DC15FA56F70071ED58 /* IBANValidatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBANValidatorTests.m; sourceTree = "<group>"; };
+		BFA1F9E815FB5A130071ED58 /* SmartPaymentAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentAccount.h; sourceTree = "<group>"; };
+		BFA1F9E915FB5A130071ED58 /* SmartPaymentAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentAccount.m; sourceTree = "<group>"; };
+		BFA1F9F515FB80180071ED58 /* SmartPaymentUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentUtils.h; sourceTree = "<group>"; };
+		BFA1F9F615FB80180071ED58 /* SmartPaymentUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentUtils.m; sourceTree = "<group>"; };
+		BFF464BE164C5AFB00C49FD3 /* SmartPaymentValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPaymentValidator.h; sourceTree = "<group>"; };
+		BFF464BF164C5AFB00C49FD3 /* SmartPaymentValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartPaymentValidator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFA1F97915F8AF290071ED58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF40927E16512377005C74F2 /* libz.dylib in Frameworks */,
+				BFA1F98015F8AF290071ED58 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFA1F98915F8AF290071ED58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF40927F165123E0005C74F2 /* libz.dylib in Frameworks */,
+				BFA1F98F15F8AF290071ED58 /* SenTestingKit.framework in Frameworks */,
+				BFA1F99115F8AF290071ED58 /* UIKit.framework in Frameworks */,
+				BFA1F99215F8AF290071ED58 /* Foundation.framework in Frameworks */,
+				BFA1F99515F8AF290071ED58 /* libSmartPayment.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF40928316512B52005C74F2 /* CountrySpecific */ = {
+			isa = PBXGroup;
+			children = (
+				BF40928016512B49005C74F2 /* SmartPaymentReaderTestsCZ.h */,
+				BF40928116512B49005C74F2 /* SmartPaymentReaderTestsCZ.m */,
+			);
+			name = CountrySpecific;
+			sourceTree = "<group>";
+		};
+		BF6A594215FDEB9700ECD56C /* CountrySpecific */ = {
+			isa = PBXGroup;
+			children = (
+				BF6A594315FDEB9700ECD56C /* SmartPaymentCZ.h */,
+				BF6A594415FDEB9700ECD56C /* SmartPaymentCZ.m */,
+			);
+			path = CountrySpecific;
+			sourceTree = "<group>";
+		};
+		BFA1F97115F8AF290071ED58 = {
+			isa = PBXGroup;
+			children = (
+				BFA1F98115F8AF290071ED58 /* SmartPayment */,
+				BFA1F99615F8AF290071ED58 /* SmartPaymentTests */,
+				BFA1F97E15F8AF290071ED58 /* Frameworks */,
+				BFA1F97D15F8AF290071ED58 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFA1F97D15F8AF290071ED58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFA1F97C15F8AF290071ED58 /* libSmartPayment.a */,
+				BFA1F98D15F8AF290071ED58 /* SmartPaymentTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFA1F97E15F8AF290071ED58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF40927D16512377005C74F2 /* libz.dylib */,
+				BFA1F97F15F8AF290071ED58 /* Foundation.framework */,
+				BFA1F98E15F8AF290071ED58 /* SenTestingKit.framework */,
+				BFA1F99015F8AF290071ED58 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFA1F98115F8AF290071ED58 /* SmartPayment */ = {
+			isa = PBXGroup;
+			children = (
+				BFA1F98215F8AF290071ED58 /* Supporting Files */,
+				BF6A594215FDEB9700ECD56C /* CountrySpecific */,
+				BFA1F9AF15F8B2DE0071ED58 /* SmartPayment.h */,
+				BFA1F9B015F8B2DE0071ED58 /* SmartPayment.m */,
+				BFA1F9E815FB5A130071ED58 /* SmartPaymentAccount.h */,
+				BFA1F9E915FB5A130071ED58 /* SmartPaymentAccount.m */,
+				BFA1F9A715F8B2640071ED58 /* SmartPaymentReader.h */,
+				BFA1F9A815F8B2640071ED58 /* SmartPaymentReader.m */,
+				BFA1F9AA15F8B2810071ED58 /* SmartPaymentWriter.h */,
+				BFA1F9AB15F8B2810071ED58 /* SmartPaymentWriter.m */,
+				BFA1F9B715F8C70B0071ED58 /* SmartPaymentConstants.h */,
+				BFA1F9B815F8C70B0071ED58 /* SmartPaymentConstants.m */,
+				BFA1F9F515FB80180071ED58 /* SmartPaymentUtils.h */,
+				BFA1F9F615FB80180071ED58 /* SmartPaymentUtils.m */,
+				BFF464BE164C5AFB00C49FD3 /* SmartPaymentValidator.h */,
+				BFF464BF164C5AFB00C49FD3 /* SmartPaymentValidator.m */,
+				BF4092841651361A005C74F2 /* SmartPaymentConfiguration.h */,
+				BF4092851651361A005C74F2 /* SmartPaymentConfiguration.m */,
+				BFA1F9D715FA44800071ED58 /* IBANValidator.h */,
+				BFA1F9D815FA44800071ED58 /* IBANValidator.m */,
+			);
+			path = SmartPayment;
+			sourceTree = "<group>";
+		};
+		BFA1F98215F8AF290071ED58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFA1F98315F8AF290071ED58 /* SmartPayment-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BFA1F99615F8AF290071ED58 /* SmartPaymentTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF40928316512B52005C74F2 /* CountrySpecific */,
+				BFA1F99715F8AF290071ED58 /* Supporting Files */,
+				BFA1F9DB15FA56F70071ED58 /* IBANValidatorTests.h */,
+				BFA1F9DC15FA56F70071ED58 /* IBANValidatorTests.m */,
+				BF40927716512191005C74F2 /* SmartPaymentReaderTests.h */,
+				BF40927816512191005C74F2 /* SmartPaymentReaderTests.m */,
+				BF40927A1651219F005C74F2 /* SmartPaymentWriterTests.h */,
+				BF40927B1651219F005C74F2 /* SmartPaymentWriterTests.m */,
+			);
+			path = SmartPaymentTests;
+			sourceTree = "<group>";
+		};
+		BFA1F99715F8AF290071ED58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFA1F99815F8AF290071ED58 /* SmartPaymentTests-Info.plist */,
+				BFA1F99915F8AF290071ED58 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFA1F97B15F8AF290071ED58 /* SmartPayment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFA1F9A115F8AF290071ED58 /* Build configuration list for PBXNativeTarget "SmartPayment" */;
+			buildPhases = (
+				BFA1F97815F8AF290071ED58 /* Sources */,
+				BFA1F97915F8AF290071ED58 /* Frameworks */,
+				BFA1F97A15F8AF290071ED58 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartPayment;
+			productName = SmartPayment;
+			productReference = BFA1F97C15F8AF290071ED58 /* libSmartPayment.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BFA1F98C15F8AF290071ED58 /* SmartPaymentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFA1F9A415F8AF290071ED58 /* Build configuration list for PBXNativeTarget "SmartPaymentTests" */;
+			buildPhases = (
+				BFA1F98815F8AF290071ED58 /* Sources */,
+				BFA1F98915F8AF290071ED58 /* Frameworks */,
+				BFA1F98A15F8AF290071ED58 /* Resources */,
+				BFA1F98B15F8AF290071ED58 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFA1F99415F8AF290071ED58 /* PBXTargetDependency */,
+			);
+			name = SmartPaymentTests;
+			productName = SmartPaymentTests;
+			productReference = BFA1F98D15F8AF290071ED58 /* SmartPaymentTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFA1F97315F8AF290071ED58 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Inmite s.r.o.";
+			};
+			buildConfigurationList = BFA1F97615F8AF290071ED58 /* Build configuration list for PBXProject "SmartPayment" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BFA1F97115F8AF290071ED58;
+			productRefGroup = BFA1F97D15F8AF290071ED58 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFA1F97B15F8AF290071ED58 /* SmartPayment */,
+				BFA1F98C15F8AF290071ED58 /* SmartPaymentTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFA1F98A15F8AF290071ED58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFA1F99B15F8AF290071ED58 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BFA1F98B15F8AF290071ED58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFA1F97815F8AF290071ED58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFA1F9A915F8B2640071ED58 /* SmartPaymentReader.m in Sources */,
+				BFA1F9AC15F8B2810071ED58 /* SmartPaymentWriter.m in Sources */,
+				BFA1F9B115F8B2DE0071ED58 /* SmartPayment.m in Sources */,
+				BFA1F9B915F8C70B0071ED58 /* SmartPaymentConstants.m in Sources */,
+				BFA1F9D915FA44800071ED58 /* IBANValidator.m in Sources */,
+				BFA1F9EA15FB5A140071ED58 /* SmartPaymentAccount.m in Sources */,
+				BFA1F9F715FB80190071ED58 /* SmartPaymentUtils.m in Sources */,
+				BF6A594515FDEB9700ECD56C /* SmartPaymentCZ.m in Sources */,
+				BFF464C0164C5AFB00C49FD3 /* SmartPaymentValidator.m in Sources */,
+				BF4092861651361B005C74F2 /* SmartPaymentConfiguration.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFA1F98815F8AF290071ED58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFA1F9AD15F8B2810071ED58 /* SmartPaymentWriter.m in Sources */,
+				BFA1F9B215F8B2DE0071ED58 /* SmartPayment.m in Sources */,
+				BFA1F9BA15F8C70B0071ED58 /* SmartPaymentConstants.m in Sources */,
+				BFA1F9DA15FA44800071ED58 /* IBANValidator.m in Sources */,
+				BFA1F9DD15FA56F70071ED58 /* IBANValidatorTests.m in Sources */,
+				BFA1F9EB15FB5A140071ED58 /* SmartPaymentAccount.m in Sources */,
+				BFA1F9F815FB80190071ED58 /* SmartPaymentUtils.m in Sources */,
+				BF6A594615FDEB9700ECD56C /* SmartPaymentCZ.m in Sources */,
+				BFF464C1164C5AFB00C49FD3 /* SmartPaymentValidator.m in Sources */,
+				BF40927916512191005C74F2 /* SmartPaymentReaderTests.m in Sources */,
+				BF40927C1651219F005C74F2 /* SmartPaymentWriterTests.m in Sources */,
+				BF40928216512B49005C74F2 /* SmartPaymentReaderTestsCZ.m in Sources */,
+				BF4092871651361B005C74F2 /* SmartPaymentConfiguration.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFA1F99415F8AF290071ED58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFA1F97B15F8AF290071ED58 /* SmartPayment */;
+			targetProxy = BFA1F99315F8AF290071ED58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BFA1F99915F8AF290071ED58 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFA1F99A15F8AF290071ED58 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BFA1F99F15F8AF290071ED58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BFA1F9A015F8AF290071ED58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFA1F9A215F8AF290071ED58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SmartPayment.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = SmartPayment;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BFA1F9A315F8AF290071ED58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SmartPayment.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = SmartPayment;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BFA1F9A515F8AF290071ED58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				INFOPLIST_FILE = "SmartPaymentTests/SmartPaymentTests-Info.plist";
+				PRODUCT_NAME = SmartPaymentTests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		BFA1F9A615F8AF290071ED58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartPayment/SmartPayment-Prefix.pch";
+				INFOPLIST_FILE = "SmartPaymentTests/SmartPaymentTests-Info.plist";
+				PRODUCT_NAME = SmartPaymentTests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFA1F97615F8AF290071ED58 /* Build configuration list for PBXProject "SmartPayment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFA1F99F15F8AF290071ED58 /* Debug */,
+				BFA1F9A015F8AF290071ED58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFA1F9A115F8AF290071ED58 /* Build configuration list for PBXNativeTarget "SmartPayment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFA1F9A215F8AF290071ED58 /* Debug */,
+				BFA1F9A315F8AF290071ED58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFA1F9A415F8AF290071ED58 /* Build configuration list for PBXNativeTarget "SmartPaymentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFA1F9A515F8AF290071ED58 /* Debug */,
+				BFA1F9A615F8AF290071ED58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFA1F97315F8AF290071ED58 /* Project object */;
+}
