@@ -31,6 +31,7 @@ The SPD standard is also patent free.
 1. Download or clone this library
 2. Go to spayd-sdk-ios folder
 3. Copy **SmartPayment** directory into your project
+4. Add **libz** into your project settings (required for full CRC32 validation)
 
 Note that this library is designed for ARC and minumum supported iOS version is iOS5. If your project is not ARC ready then you might use **-fobjc-arc** compiler flag to turn it on on per-file basis (Look for [LLVM documentation](http://clang.llvm.org/docs/AutomaticReferenceCounting.html) for details). This code may work on iOS4.2 which has partial ARC support, but we're not supporting this operating system in MASTER branch.
 
@@ -72,4 +73,6 @@ if (!payment) {
 
 ### Note about configurations
 
-The **SmartPaymentConfiguration** class holds information typical for domestic payments, like default currency code and time zone, valid for your country. The default currency code is used only when QR code doesn't contain CC attribute. The configuration also keeps configuration for **SmartPayment** and **SmartPaymentAccount** model classes.
+The **SmartPaymentConfiguration** class holds information typical for domestic payments, like default currency code and time zone, valid for your country. The default currency code is used only when QR code doesn't contain CC attribute. The configuration also keeps setup for **SmartPayment** and **SmartPaymentAccount** model classes. 
+
+Without propper configuration you will not be able to parse DT (due date) attribute correctly and produced NSDate will not be accurate due to wrong GMT offset in the time zone. This concept works well for domestic payments but may be inaccurate for foreign bank transfers. Ask me at juraj@inmite.eu about how to solve this problem correctly.
