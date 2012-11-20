@@ -60,6 +60,8 @@
 
 - (id) createPaymentFromCode:(NSString*)code
 {
+	self.error = nil;
+	
 	if (!_configuration) {
 		NSLog(@"SmartPaymentReader: You have to initialize reader with valid configuration.");
 		return nil;
@@ -94,6 +96,9 @@
 
 - (NSDictionary*) paymentAttributesFromCode:(NSString*)code
 {
+	if ([code hasSuffix:@"*"]) {
+		code = [code substringToIndex:code.length - 1];
+	}
 	NSArray * keyValues = [code componentsSeparatedByString:@"*"];
 	
 	// There must be at least 3 fields available: PAY, version, ACC

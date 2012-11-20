@@ -83,6 +83,9 @@
 	SmartPayment * pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098021"];
 	STAssertTrue(pay == nil, @"IBAN validation is wrong");
 	
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*"];
+	STAssertTrue(pay != nil, @"IBAN validation is wrong. Asterisk at the end is optional but valid.");
+	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:123,0"];
 	STAssertTrue(pay == nil, @"AMOUNT validation is wrong");
 	// AMOUNT without currency
