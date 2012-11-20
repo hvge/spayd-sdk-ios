@@ -1,17 +1,40 @@
 # Smart Payment Descriptor for iOS
 
-The **spayd-sdk-ios** project is an full iOS implementation of [Smart Payment Descriptor](http://qr-platba.cz) which is going to be de-facto standard for QR payments on mobile devices in Czech Republic. If you're interested in full specification, please go to http://qr-platba.cz website.
+The **spayd-sdk-ios** project is a full iOS implementation of [Smart Payment Descriptor](http://qr-platba.cz) which is a standard for QR code payments on mobile devices in Czech Republic. If you're interested in full specification, please go to http://qr-platba.cz website.
 
-## Installation
+## Library Features
+
+### License
+
+The library is licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). It means that it can be freely used for non-commercial and also for commercial projects. For more information look for full license agreement.
+
+The SPD standard also is patent free.
+
+### Already implemented features
+
+* Parsing and full validation of SPD code
+* Full IBAN validation
+* Czech account number validation
+* Czech model object for payment
+
+### Missing features
+
+* SmartPaymentWriter class is not implemented yet
+* CRC32 validation
+* Make easy to plug-in library for both simulator & devide platform
+
+
+## Installation & Usage
+
+### Installation
 
 1. Download or clone this library
 2. Go to spayd-sdk-ios folder
 3. Copy **SmartPayment** directory into your project
 
+### Usage
 
-## Usage
-
-The basic usage of library is very simple. At first, you have to create configuration for your country or use some existing one *(right now, only Czech Republic is supported)*. 
+The basic usage is very simple:
 
 ```
 #import "SmartPaymentCZ.h"
@@ -43,22 +66,10 @@ SmartPaymentConfiguration * conf = [SmartPaymentCZ czechConfiguration];
 SmartPaymentReader * reader = [[SmartPaymentReader alloc] initWithConfiguration:conf]
 SmartPaymentCZ * payment = [reader createPaymentFromCode:yourQRCode];
 if (!payment) {
-	// well, something is wrong. You can display general warning, like "This is not QR code with payment"
-	// or inspect error in reader.error property.
+	// well, something is wrong. In this case you can inspect error in reader.error property.
 }
 ```
 
-# Library Features
+### Note about configurations
 
-## Already implemented features
-
-* Parsing and full validation of SPD code
-* Full IBAN validation
-* Czech account number validation
-* Czech model object for payment
-
-## Missing features
-
-* SmartPaymentWriter class is not implemented yet
-* CRC32 validation
-* Make easy to plug-in library for both simulator & devide platform
+The **SmartPaymentConfiguration** class holds information typical for domestic payments, like default currency code and time zone, valid for your country. The default currency code is used only when QR code doesn't contain CC attribute. The configuration also keeps configuration for **SmartPayment** and **SmartPaymentAccount** model classes.
