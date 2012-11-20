@@ -32,6 +32,8 @@ The SPD standard is also patent free.
 2. Go to spayd-sdk-ios folder
 3. Copy **SmartPayment** directory into your project
 
+Note that this library is designed for ARC and minumum supported iOS version is iOS5. If your project is not ARC ready then you might use **-fobjc-arc** compiler flag to turn it on on per-file basis (Look for [LLVM documentation](http://clang.llvm.org/docs/AutomaticReferenceCounting.html) for details). This code may work on iOS4.2 which has partial ARC support, but we're not supporting this operating system in MASTER branch.
+
 ### Usage
 
 The basic usage is very simple:
@@ -39,7 +41,6 @@ The basic usage is very simple:
 ```
 #import "SmartPaymentCZ.h"
 
-// The basic usage
 NSString * yourQRCode = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*RF:7004139146*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
 
 SmartPaymentConfiguration * conf = [SmartPaymentCZ czechConfiguration];
@@ -59,7 +60,6 @@ For advanced usage you can create instance of **SmartPaymentReader** class and p
 #import "SmartPaymentCZ.h"
 #import "SmartPaymentReader.h"
 
-// The basic usage
 NSString * yourQRCode = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*RF:7004139146*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
 
 SmartPaymentConfiguration * conf = [SmartPaymentCZ czechConfiguration];
