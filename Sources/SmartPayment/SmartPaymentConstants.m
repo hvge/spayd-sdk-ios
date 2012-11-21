@@ -65,4 +65,4 @@ NSSet * SmartPayment_GetKnownTags()
 
 // Error descriptor
 
-NSString * const kSmartPaymentErrorDomain = @"com.paylibo.error";
+NSString * const kSmartPaymentErrorDomain = @"cz.qr-platba.error";
