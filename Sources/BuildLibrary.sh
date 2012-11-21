@@ -65,7 +65,7 @@ function CREATE_FAT_LIBRARY
 	PLATFORM2="$TMP_DIR/$LIBNAME-$3/lib$LIBNAME.a"
 	OUTPUT="$OUTPUT_BASE_DIR/lib$LIBNAME.a"
 	
-	$RM -r "$OUTPUT_BASE_DIR"
+	$RM -r "$OUTPUT_DIR"
 	$MKDIR -p "$OUTPUT_BASE_DIR"
 	if [ $? -ne 0 ]; then
 		exit 1;
@@ -92,11 +92,24 @@ function CREATE_FAT_LIBRARY
 		exit 1;
 	fi
 	
+	# create VERSION.txt file
+
+	GIT_ORIGIN=`git config --get remote.origin.url`
+	GIT_COMMIT=`git rev-parse --verify HEAD`
+	GIT_BRANCH=`git symbolic-ref --short -q HEAD`
+	BUILD_DATE=`date`
+	VERSION_STRING="ARCHIVE : $LIBNAME\nORIGIN  : $GIT_ORIGIN\nBRANCH  : $GIT_BRANCH\nCOMMIT  : $GIT_COMMIT\nDATE    : $BUILD_DATE"
+	
+	echo "$VERSION_STRING"
+	echo "$VERSION_STRING" > $OUTPUT_BASE_DIR/VERSION.txt
+	
+	# compress everything
+	
 	echo "$0: -----------------------------------------------------"
 	echo "$0: Creating archive..."
 	echo "$0: -----------------------------------------------------"
 	pushd $OUTPUT_DIR
-	tar -zcvf $LIBNAME.tar.gz $LIBNAME
+	tar -zcvf $LIBNAME-$GIT_BRANCH.tar.gz $LIBNAME
 	popd
 }
 
@@ -130,4 +143,3 @@ $RM -r "$TMP_DIR"
 echo "$0: -----------------------------------------------------"
 echo "$0: OK"
 echo "$0: -----------------------------------------------------"
-
