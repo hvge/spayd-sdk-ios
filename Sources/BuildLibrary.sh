@@ -24,7 +24,8 @@ set +v
 # global settings
 TARGET_NAME=SmartPayment
 TMP_DIR="../Temp"
-OUTPUT_BASE_DIR="../Library/$TARGET_NAME"
+OUTPUT_DIR="../Library"
+OUTPUT_BASE_DIR="$OUTPUT_DIR/$TARGET_NAME"
 SRC_DIR="./$TARGET_NAME"
 
 # find tools
@@ -64,7 +65,8 @@ function CREATE_FAT_LIBRARY
 	PLATFORM2="$TMP_DIR/$LIBNAME-$3/lib$LIBNAME.a"
 	OUTPUT="$OUTPUT_BASE_DIR/lib$LIBNAME.a"
 	
-	mkdir -p "$OUTPUT_BASE_DIR"
+	$RM -r "$OUTPUT_BASE_DIR"
+	$MKDIR -p "$OUTPUT_BASE_DIR"
 	if [ $? -ne 0 ]; then
 		exit 1;
 	fi
@@ -89,6 +91,13 @@ function CREATE_FAT_LIBRARY
 	if [ $? -ne 0 ]; then
 		exit 1;
 	fi
+	
+	echo "$0: -----------------------------------------------------"
+	echo "$0: Creating archive..."
+	echo "$0: -----------------------------------------------------"
+	pushd $OUTPUT_DIR
+	tar -zcvf $LIBNAME.tar.gz $LIBNAME
+	popd
 }
 
 # do the stuff
@@ -118,4 +127,7 @@ fi
 $RM -r build
 $RM -r "$TMP_DIR"
 
+echo "$0: -----------------------------------------------------"
 echo "$0: OK"
+echo "$0: -----------------------------------------------------"
+

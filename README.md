@@ -28,8 +28,15 @@ The SPD standard is also patent free.
 
 ### Installation
 
+#### Precompiled library
+
+1. Go to [downloads](https://github.com/hvge/spayd-sdk-ios/downloads) and download precompiled version of library
+2. Extract downloaded archive and drag & drop its content into your Xcode project
+
+#### Manual copy & setup
+
 1. Download or clone this library
-2. Go to spayd-sdk-ios folder
+2. Go to **Sources** folder
 3. Copy **SmartPayment** directory into your project
 4. Add **libz** into your project settings (required for full CRC32 validation)
 
