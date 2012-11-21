@@ -19,15 +19,103 @@
 # Author: Juraj Durech <juraj@inmite.eu>
 # ---------------------------------------------------------------------
 
+set +v
+
+# global settings
+TARGET_NAME=SmartPayment
+TMP_DIR="../Temp"
+OUTPUT_BASE_DIR="../Library/$TARGET_NAME"
+SRC_DIR="./$TARGET_NAME"
+
+# find tools
+XCODEBUILD=`xcrun -sdk iphoneos -find xcodebuild`
+LIPO=`xcrun -sdk iphoneos -find lipo`
+CP="cp"
+RM="rm"
+MKDIR="mkdir"
+
+# Build a single platform (iphone / simulator)
+
 function BUILD_PLATFORM
 {
-	# $1 - sdk name
-	
+	LIBNAME=$1
+	PLATFORM=$2
+		
 	echo "$0: -----------------------------------------------------"
-	echo "$0: Building library for $1"
+	echo "$0: Building $LIBNAME for platform $PLATFORM"
 	echo "$0: -----------------------------------------------------"
-	
-	GCC_PATH=`xcodebuild -find gcc -sdk $1`
-	
+
+	BUILD_DIR="$TMP_DIR/$LIBNAME-$PLATFORM"
+	$XCODEBUILD -project $LIBNAME.xcodeproj -configuration 'Release' -sdk $PLATFORM CONFIGURATION_BUILD_DIR=$BUILD_DIR OBJROOT=$TMP_DIR clean
+	if [ $? -ne 0 ]; then
+		exit 1;
+	fi
+	$XCODEBUILD -project $LIBNAME.xcodeproj -configuration 'Release' -sdk $PLATFORM CONFIGURATION_BUILD_DIR=$BUILD_DIR OBJROOT=$TMP_DIR build
 }
 
+function CREATE_FAT_LIBRARY
+{
+	echo "$0: -----------------------------------------------------"
+	echo "$0: Creating fat library"
+	echo "$0: -----------------------------------------------------"
+	
+	LIBNAME=$1
+	PLATFORM1="$TMP_DIR/$LIBNAME-$2/lib$LIBNAME.a"
+	PLATFORM2="$TMP_DIR/$LIBNAME-$3/lib$LIBNAME.a"
+	OUTPUT="$OUTPUT_BASE_DIR/lib$LIBNAME.a"
+	
+	mkdir -p "$OUTPUT_BASE_DIR"
+	if [ $? -ne 0 ]; then
+		exit 1;
+	fi
+	
+	$LIPO -create $PLATFORM1 $PLATFORM2 -output $OUTPUT
+	if [ $? -ne 0 ]; then
+		echo "$1: can't create universal library $1"
+		exit 1;
+	fi
+	
+	# copy headers
+
+	$CP $LIBNAME/*.h $OUTPUT_BASE_DIR
+	if [ $? -ne 0 ]; then
+		exit 1;
+	fi
+	$MKDIR $OUTPUT_BASE_DIR/CountrySpecific
+	if [ $? -ne 0 ]; then
+		exit 1;
+	fi
+	$CP $LIBNAME/CountrySpecific/*.h $OUTPUT_BASE_DIR/CountrySpecific
+	if [ $? -ne 0 ]; then
+		exit 1;
+	fi
+}
+
+# do the stuff
+
+mkdir -p "$TMP_DIR"
+if [ $? -ne 0 ]; then
+	exit 1;
+fi
+
+BUILD_PLATFORM $TARGET_NAME iphoneos
+if [ $? -ne 0 ]; then
+	exit 1;
+fi
+
+BUILD_PLATFORM $TARGET_NAME iphonesimulator
+if [ $? -ne 0 ]; then
+	exit 1;
+fi
+
+CREATE_FAT_LIBRARY $TARGET_NAME iphoneos iphonesimulator
+if [ $? -ne 0 ]; then
+	exit 1;
+fi
+
+# cleanup
+
+$RM -r build
+$RM -r "$TMP_DIR"
+
+echo "$0: OK"
