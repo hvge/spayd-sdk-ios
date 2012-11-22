@@ -125,6 +125,9 @@
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-UNKNOWN:XXX"];
 	STAssertTrue(pay != nil, @"X-TAG validation is wrong");
 
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*RN:1"];
+	STAssertTrue(pay != nil, @"Empty value must be ignored");
+
 }
 
 - (void) testAlternateAccounts

@@ -142,8 +142,7 @@
 		value = [value stringByReplacingOccurrencesOfString:@"+" withString:@" "];
 		value = [value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		if (value.length == 0) {
-			[self setupError:SmartPaymentError_NotAPayment str:[NSString stringWithFormat:@"Key '%@' has empty value", key]];
-			return nil;
+			continue;
 		}
 		
 		[resultDictionary setObject:value forKey:key];
