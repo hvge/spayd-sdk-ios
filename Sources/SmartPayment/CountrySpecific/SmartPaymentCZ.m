@@ -57,7 +57,7 @@ static NSString * const kX_URL = @"X-URL";
 							  SPD_TAG_P(kX_SS,  SmartPaymentValueType_NumberStr, @1, @10)
 							  SPD_TAG_P(kX_PER, SmartPaymentValueType_Number,    @1, @30)
 							  SPD_TAG_P(kX_ID,  SmartPaymentValueType_String,    @1, @20)
-							  SPD_TAG_P(kX_URL, SmartPaymentValueType_String,    @1, @140)
+							  SPD_TAG_P(kX_URL, SmartPaymentValueType_String,    @1, @140, @(TRUE))
 							  nil];
 	[rules addEntriesFromDictionary:czRules];
 	return rules;

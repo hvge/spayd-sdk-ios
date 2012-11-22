@@ -37,8 +37,8 @@
 {
 	_reader = [[SmartPaymentReader alloc] initWithConfiguration:[SmartPaymentCZ czechConfiguration]];
 	
-	_validCode1 = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*RF:7004139146*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
-	_validCode2 = @"SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:480.50*CC:CZK*RF:7004139146*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
+	_validCode1 = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*RF:1234567890123456*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
+	_validCode2 = @"SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:480.50*CC:CZK*RF:1234567890123456*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
 }
 
 - (void) testValidIBAN
@@ -71,7 +71,7 @@
 		STAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
 		STAssertTrue([pay.amount isEqualToNumber:@480.50], @"Wrong Amount");
 		STAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Wrong currency code");
-		STAssertTrue([pay.identifierForReceiver isEqualToString:@"7004139146"], @"Wrong identifier for receiver");
+		STAssertTrue([pay.identifierForReceiver isEqualToString:@"1234567890123456"], @"Wrong identifier for receiver");
 		STAssertTrue([pay.messageForReceiver isEqualToString:@"PLATBA ZA ZBOZI"], @"Wrong message for receiver");
 		NSTimeInterval testDate = 1337810400;	// you can use http://www.epochconverter.com/ site for validation
 		STAssertTrue(pay.dueDate.timeIntervalSince1970 == testDate, @"Wrong due date");
@@ -86,24 +86,39 @@
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*"];
 	STAssertTrue(pay != nil, @"IBAN validation is wrong. Asterisk at the end is optional but valid.");
 	
+	pay = [_reader createPaymentFromCode:@"SPD*9.9*ACC:CZ5855000000001265098001"];
+	STAssertTrue(pay == nil, @"Wrong version check");
+	
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*RN:1"];
+	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*"];
+	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:"];
+	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:123,0"];
-	STAssertTrue(pay == nil, @"AMOUNT validation is wrong");
-	// AMOUNT without currency
+	STAssertTrue(pay == nil, @"AM validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:123.00"];
-	STAssertTrue(pay != nil, @"AMOUNT validation is wrong");
+	STAssertTrue(pay != nil, @"AM without currency must be allowed");
+	STAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Substituted currency code is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*CC:CZ"];
-	STAssertTrue(pay == nil, @"CURRENCY CODE validation is wrong");
+	STAssertTrue(pay == nil, @"CC validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*CC:CZKK"];
-	STAssertTrue(pay == nil, @"CURRENCY CODE validation is wrong");
+	STAssertTrue(pay == nil, @"CC validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RF:uydfuy38478743"];
 	STAssertTrue(pay == nil, @"RF validation is wrong");
-	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RF:01234567890123456"];
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RF:12345678901234560"];
 	STAssertTrue(pay == nil, @"RF validation is wrong");
 	
-	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RN:123456789 123456789 123456789 123456"];
-	STAssertTrue(pay == nil, @"RN validation is wrong");
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RN:123456789 123456789 123456789 12345xxxxxxxxxxx"];
+	STAssertTrue(pay != nil, @"RN validation is wrong");
+	STAssertTrue([pay.receiversName isEqualToString:@"123456789 123456789 123456789 12345"], @"RN should be cropped to maximum length");
+	
+	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*MSG:123456789 123456789 123456789 123456789 123456789 123456789 xxxx"];
+	STAssertTrue(pay != nil, @"MSG validation is wrong");
+	STAssertTrue([pay.messageForReceiver isEqualToString:@"123456789 123456789 123456789 123456789 123456789 123456789 "], @"MSG should be cropped to maximum length");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*DT:2012 10 10"];
 	STAssertTrue(pay == nil, @"DT validation is wrong");
@@ -124,10 +139,6 @@
 	STAssertTrue(pay == nil, @"Known tags validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-UNKNOWN:XXX"];
 	STAssertTrue(pay != nil, @"X-TAG validation is wrong");
-
-	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*RN:1"];
-	STAssertTrue(pay != nil, @"Empty value must be ignored");
-
 }
 
 - (void) testAlternateAccounts

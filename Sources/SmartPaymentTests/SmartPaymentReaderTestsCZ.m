@@ -75,18 +75,34 @@
 
 - (void) testWrongCZCodes
 {	
-	SmartPayment * payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-VS:12345678901"];
+	SmartPayment * payment = nil;
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-VS:12345678901"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-VS length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-VS:xx"];
+	STAssertTrue(payment == nil, @"CZ: wrong X-VS number test");
+	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-SS:12345678901"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-SS length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-SS:xx"];
+	STAssertTrue(payment == nil, @"CZ: wrong X-SS number test");
+
+	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-KS:12345678901"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-KS length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-KS:xx"];
+	STAssertTrue(payment == nil, @"CZ: wrong X-KS number test");
+	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-ID:123456789012345678901"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-ID length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-ID:xx"];
+	STAssertTrue(payment != nil, @"CZ: wrong X-ID number test");
+	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:0"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:31"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:xx"];
+	STAssertTrue(payment == nil, @"CZ: wrong X-PER number test");
 }
 
 @end

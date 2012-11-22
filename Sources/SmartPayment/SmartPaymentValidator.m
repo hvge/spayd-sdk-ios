@@ -238,8 +238,20 @@
 		NSUInteger min = [[params objectAtIndex:0] unsignedIntegerValue];
 		NSUInteger max = [[params objectAtIndex:1] unsignedIntegerValue];
 		NSUInteger length = value.length;
-		if (length < min || length > max) {
+		if (length < min) {
 			return nil;
+		}
+		if (length > max) {
+			if (params.count > 2) {
+				BOOL canCropValue = [[params objectAtIndex:2] boolValue];
+				if (canCropValue) {
+					value = [value substringToIndex:max];
+				} else {
+					return nil;
+				}
+			} else {
+				return nil;
+			}
 		}
 	}
 	return value;
@@ -255,8 +267,20 @@
 		NSUInteger min = [[params objectAtIndex:0] unsignedIntegerValue];
 		NSUInteger max = [[params objectAtIndex:1] unsignedIntegerValue];
 		NSUInteger length = value.length;
-		if (length < min || length > max) {
+		if (length < min) {
 			return nil;
+		}
+		if (length > max) {
+			if (params.count > 2) {
+				BOOL canCropValue = [[params objectAtIndex:2] boolValue];
+				if (canCropValue) {
+					value = [value substringToIndex:max];
+				} else {
+					return nil;
+				}
+			} else {
+				return nil;
+			}
 		}
 	}
 	return value;

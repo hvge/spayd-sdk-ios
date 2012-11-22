@@ -113,7 +113,6 @@
 	}
 	if (![[keyValues objectAtIndex:1] isEqualToString:kSmartPayment_Version]) {
 		// Unknown version
-		// TODO: make this check better
 		[self setupError:SmartPaymentError_UnsupportedVersion str:[NSString stringWithFormat:@"Unknown SmartPayment version %@", [keyValues objectAtIndex:1]]];
 		return nil;
 	}
