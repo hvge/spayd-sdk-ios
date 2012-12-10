@@ -92,6 +92,16 @@
 	return sp;
 }
 
+- (SmartPayment*) createPaymentFromData:(NSData*)data
+{
+	NSString * code = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+	if (code) {
+		return [self createPaymentFromCode:code];
+	}
+	[self setupError:SmartPaymentError_EncodingError str:@"Unable to create unicode string from Latin-1 data."];
+	return nil;
+}
+
 #pragma mark - Public API
 
 - (NSDictionary*) paymentAttributesFromCode:(NSString*)code
@@ -182,6 +192,12 @@
 {
 	SmartPaymentReader * reader = [[SmartPaymentReader alloc] initWithConfiguration:configuration];
 	return [reader createPaymentFromCode:code];
+}
+
++ (id) smartPaymentWithData:(NSData*)data configuration:(SmartPaymentConfiguration*)configuration
+{
+	SmartPaymentReader * reader = [[SmartPaymentReader alloc] initWithConfiguration:configuration];
+	return [reader createPaymentFromData:data];
 }
 
 @end

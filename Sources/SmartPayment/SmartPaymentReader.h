@@ -28,15 +28,21 @@
 // Returns error. Value is valid only if reader failed before.
 @property (nonatomic, strong) NSError * error;
 
+// Parses input code and returns dictionary with keys and values.
 - (NSDictionary*) paymentAttributesFromCode:(NSString*)code;
-
+// Creates payment from given code. Note that code must be regular unichar string.
 - (SmartPayment*) createPaymentFromCode:(NSString*)code;
+// Creates payment from given data. The method assumes that input data is encoded in Latin-1 (ISO 8859-1)
+- (SmartPayment*) createPaymentFromData:(NSData*)data;
 
 @end
 
 
 @interface SmartPayment (Reader)
 
+// Creates new instance of SmartPayment (or another class defined in configuration).
 + (id) smartPaymentWithCode:(NSString*)code configuration:(SmartPaymentConfiguration*)configuration;
+// Creates new instance of SmartPayment (or another class defined in configuration).
++ (id) smartPaymentWithData:(NSData*)data configuration:(SmartPaymentConfiguration*)configuration;
 
 @end

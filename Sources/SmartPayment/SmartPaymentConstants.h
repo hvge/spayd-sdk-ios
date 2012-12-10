@@ -57,6 +57,7 @@ typedef enum {
 	SmartPaymentError_UnsupportedVersion,			// Unsupported version of smart payment
 	SmartPaymentError_MissingRequiredAttributes,	// Payment doesn't contain ACC field or other required attributes
 	SmartPaymentError_DataError,					// Validation performed on some attributes did fail.
+	SmartPaymentError_EncodingError,				// Unable to create NSString from input NSData.
 	SmartPaymentError_WrongChecksum,				// CRC32 checksum is wrong
 } SmartPaymentErrorCode;
 
