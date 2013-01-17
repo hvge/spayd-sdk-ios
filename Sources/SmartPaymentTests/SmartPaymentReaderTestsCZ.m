@@ -98,6 +98,8 @@
 	STAssertTrue(payment != nil, @"CZ: wrong X-ID number test");
 	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:0"];
+	STAssertTrue(payment != nil, @"CZ: wrong X-PER length test");
+	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:-1"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:31"];
 	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
