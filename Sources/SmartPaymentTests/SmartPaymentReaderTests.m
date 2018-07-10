@@ -26,7 +26,9 @@
 {
 	SmartPaymentReader * _reader;
 	NSString * _validCode1;
-	NSString * _validCode2;
+    NSString * _validCode2;
+    NSString * _validCode3;
+    NSString * _validCode4;
 }
 
 @end
@@ -38,121 +40,170 @@
 	_reader = [[SmartPaymentReader alloc] initWithConfiguration:[SmartPaymentCZ czechConfiguration]];
 	
 	_validCode1 = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*RF:1234567890123456*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
-	_validCode2 = @"SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:480.50*CC:CZK*RF:1234567890123456*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
+    _validCode2 = @"SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:480.50*CC:CZK*RF:1234567890123456*X-VS:1234567890*DT:20120524*MSG:PLATBA ZA ZBOZI";
+
+
+    // Note: The space after the * delimiter is left intentionally.
+    // The 1.1 Standards use this string as an example, although the whitespace is probably a mistake.
+
+    // Standing payment
+    _validCode3 = @"SPD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*FRQ:1M*DT:20120524*DL:20130524* DH:0";
+
+    // Direct debit
+    _validCode4 = @"SCD*1.0*ACC:CZ5855000000001265098001*AM:480.50*CC:CZK*FRQ:1M*DT:20120524*DL:20130524* DH:0";
 }
 
 - (void) testValidIBAN
 {
 	SmartPayment * payment = [_reader createPaymentFromCode:_validCode1];
-	STAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
+	XCTAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
 	if (payment) {
 		SmartPayment * pay = payment;
-		STAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
+		XCTAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
 	}
 }
 
 - (void) testValidIBANandBIC
 {
-	SmartPayment * payment = [_reader createPaymentFromCode:_validCode2];
-	STAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
-	if (payment) {
-		SmartPayment * pay = payment;
-		STAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
-		STAssertTrue([pay.account.bic isEqualToString:@"RZBCCZPP"], @"Wrong BIC");
-	}
+    SmartPayment * payment = [_reader createPaymentFromCode:_validCode2];
+    XCTAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
+    if (payment) {
+        SmartPayment * pay = payment;
+        XCTAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
+        XCTAssertTrue([pay.account.bic isEqualToString:@"RZBCCZPP"], @"Wrong BIC");
+    }
 }
 
 - (void) testValidCode
 {
 	SmartPayment * payment = [_reader createPaymentFromCode:_validCode1];
-	STAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
+	XCTAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
 	if (payment) {
 		SmartPayment * pay = payment;
-		STAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
-		STAssertTrue([pay.amount isEqualToNumber:@480.50], @"Wrong Amount");
-		STAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Wrong currency code");
-		STAssertTrue([pay.identifierForReceiver isEqualToString:@"1234567890123456"], @"Wrong identifier for receiver");
-		STAssertTrue([pay.messageForReceiver isEqualToString:@"PLATBA ZA ZBOZI"], @"Wrong message for receiver");
+        XCTAssertTrue(pay.type == SmartPaymentTypeSinglePayment, @"Wrong payment type");
+		XCTAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
+		XCTAssertTrue([pay.amount isEqualToNumber:@480.50], @"Wrong Amount");
+		XCTAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Wrong currency code");
+		XCTAssertTrue([pay.identifierForReceiver isEqualToString:@"1234567890123456"], @"Wrong identifier for receiver");
+		XCTAssertTrue([pay.messageForReceiver isEqualToString:@"PLATBA ZA ZBOZI"], @"Wrong message for receiver");
 		NSTimeInterval testDate = 1337810400;	// you can use http://www.epochconverter.com/ site for validation
-		STAssertTrue(pay.dueDate.timeIntervalSince1970 == testDate, @"Wrong due date");
+		XCTAssertTrue(pay.dueDate.timeIntervalSince1970 == testDate, @"Wrong due date");
 	}
+}
+
+- (void) testValidStandingOrder
+{
+    SmartPayment * payment = [_reader createPaymentFromCode:_validCode3];
+    XCTAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
+    if (payment) {
+        SmartPayment * pay = payment;
+        XCTAssertTrue(pay.type == SmartPaymentTypeStandingOrder, @"Wrong payment type");
+        XCTAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
+        XCTAssertTrue(pay.amount.doubleValue == 480.50, @"Wrong Amount");
+        XCTAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Wrong Amount");
+        XCTAssertTrue([pay.frequency isEqualToString:@"1M"], @"Wrong Frequency");
+        NSTimeInterval testDate = 1337810400;    // you can use http://www.epochconverter.com/ site for validation
+        XCTAssertTrue(pay.dueDate.timeIntervalSince1970 == testDate, @"Wrong due date");
+        testDate = 1369346400;    // you can use http://www.epochconverter.com/ site for validation
+        XCTAssertTrue(pay.lastDate.timeIntervalSince1970 == testDate, @"Wrong last date");
+        XCTAssertTrue(pay.deathHandling.boolValue == NO, @"Wrong death handling strategy.");
+    }
+}
+
+- (void) testValidDirectDebit
+{
+    SmartPayment * payment = [_reader createPaymentFromCode:_validCode4];
+    XCTAssertTrue(payment != nil, @"SmartPaymentCZ creation failed");
+    if (payment) {
+        SmartPayment * pay = payment;
+        XCTAssertTrue(pay.type == SmartPaymentTypeDirectDebit, @"Wrong payment type");
+        XCTAssertTrue([pay.account.iban isEqualToString:@"CZ5855000000001265098001"], @"Wrong IBAN");
+        XCTAssertTrue(pay.amount.doubleValue == 480.50, @"Wrong Amount");
+        XCTAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Wrong Amount");
+        XCTAssertTrue([pay.frequency isEqualToString:@"1M"], @"Wrong Frequency");
+        NSTimeInterval testDate = 1337810400;    // you can use http://www.epochconverter.com/ site for validation
+        XCTAssertTrue(pay.dueDate.timeIntervalSince1970 == testDate, @"Wrong due date");
+        testDate = 1369346400;    // you can use http://www.epochconverter.com/ site for validation
+        XCTAssertTrue(pay.lastDate.timeIntervalSince1970 == testDate, @"Wrong last date");
+        XCTAssertTrue(pay.deathHandling.boolValue == NO, @"Wrong death handling strategy.");
+    }
 }
 
 - (void) testWrongValues
 {
 	SmartPayment * pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098021"];
-	STAssertTrue(pay == nil, @"IBAN validation is wrong");
+	XCTAssertTrue(pay == nil, @"IBAN validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*"];
-	STAssertTrue(pay != nil, @"IBAN validation is wrong. Asterisk at the end is optional but valid.");
+	XCTAssertTrue(pay != nil, @"IBAN validation is wrong. Asterisk at the end is optional but valid.");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*9.9*ACC:CZ5855000000001265098001"];
-	STAssertTrue(pay == nil, @"Wrong version check");
+	XCTAssertTrue(pay == nil, @"Wrong version check");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*RN:1"];
-	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	XCTAssertTrue(pay != nil, @"Empty value must be ignored");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:*"];
-	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	XCTAssertTrue(pay != nil, @"Empty value must be ignored");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:"];
-	STAssertTrue(pay != nil, @"Empty value must be ignored");
+	XCTAssertTrue(pay != nil, @"Empty value must be ignored");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:123,0"];
-	STAssertTrue(pay == nil, @"AM validation is wrong");
+	XCTAssertTrue(pay == nil, @"AM validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*AM:123.00"];
-	STAssertTrue(pay != nil, @"AM without currency must be allowed");
-	STAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Substituted currency code is wrong");
+	XCTAssertTrue(pay != nil, @"AM without currency must be allowed");
+	XCTAssertTrue([pay.currencyCode isEqualToString:@"CZK"], @"Substituted currency code is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*CC:CZ"];
-	STAssertTrue(pay == nil, @"CC validation is wrong");
+	XCTAssertTrue(pay == nil, @"CC validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*CC:CZKK"];
-	STAssertTrue(pay == nil, @"CC validation is wrong");
+	XCTAssertTrue(pay == nil, @"CC validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RF:uydfuy38478743"];
-	STAssertTrue(pay == nil, @"RF validation is wrong");
+	XCTAssertTrue(pay == nil, @"RF validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RF:12345678901234560"];
-	STAssertTrue(pay == nil, @"RF validation is wrong");
+	XCTAssertTrue(pay == nil, @"RF validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*RN:123456789 123456789 123456789 12345xxxxxxxxxxx"];
-	STAssertTrue(pay != nil, @"RN validation is wrong");
-	STAssertTrue([pay.receiversName isEqualToString:@"123456789 123456789 123456789 12345"], @"RN should be cropped to maximum length");
+	XCTAssertTrue(pay != nil, @"RN validation is wrong");
+	XCTAssertTrue([pay.receiversName isEqualToString:@"123456789 123456789 123456789 12345"], @"RN should be cropped to maximum length");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*MSG:123456789 123456789 123456789 123456789 123456789 123456789 xxxx"];
-	STAssertTrue(pay != nil, @"MSG validation is wrong");
-	STAssertTrue([pay.messageForReceiver isEqualToString:@"123456789 123456789 123456789 123456789 123456789 123456789 "], @"MSG should be cropped to maximum length");
+	XCTAssertTrue(pay != nil, @"MSG validation is wrong");
+	XCTAssertTrue([pay.messageForReceiver isEqualToString:@"123456789 123456789 123456789 123456789 123456789 123456789 "], @"MSG should be cropped to maximum length");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*DT:2012 10 10"];
-	STAssertTrue(pay == nil, @"DT validation is wrong");
+	XCTAssertTrue(pay == nil, @"DT validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*DT:20129999"];
-	STAssertTrue(pay == nil, @"DT validation is wrong");
+	XCTAssertTrue(pay == nil, @"DT validation is wrong");
 
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*PT:2222"];
-	STAssertTrue(pay == nil, @"PT validation is wrong");
+	XCTAssertTrue(pay == nil, @"PT validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*NT:X"];
-	STAssertTrue(pay == nil, @"NT validation is wrong");
+	XCTAssertTrue(pay == nil, @"NT validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*NT:P"];
-	STAssertTrue(pay != nil, @"NT validation is wrong");
+	XCTAssertTrue(pay != nil, @"NT validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*NT:E"];
-	STAssertTrue(pay != nil, @"NT validation is wrong");
+	XCTAssertTrue(pay != nil, @"NT validation is wrong");
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*WRONG:XXX"];
-	STAssertTrue(pay == nil, @"Known tags validation is wrong");
+	XCTAssertTrue(pay == nil, @"Known tags validation is wrong");
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-UNKNOWN:XXX"];
-	STAssertTrue(pay != nil, @"X-TAG validation is wrong");
+	XCTAssertTrue(pay != nil, @"X-TAG validation is wrong");
 }
 
 - (void) testAlternateAccounts
 {
 	SmartPayment * pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*ALT-ACC:CZ3208000000000000007894,CZ0908000000000353497163,AT736000000002386492"];
-	STAssertTrue(pay != nil, @"ALT-ACC validation is wrong");
+	XCTAssertTrue(pay != nil, @"ALT-ACC validation is wrong");
 	if (pay)
 	{
 		NSArray * allAccounts = [pay allAccounts];
-		STAssertTrue(allAccounts.count == 4, @"Wrong ALT-ACC parser.");
+		XCTAssertTrue(allAccounts.count == 4, @"Wrong ALT-ACC parser.");
 	}
 	
 	pay = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*ALT-ACC:CZ3208000000000000007894,CZ0908000000000353497163,AT736000010002386492"];
-	STAssertTrue(pay == nil, @"ALT-ACC validation is wrong. Wrong IBAN passed over tests");
+	XCTAssertTrue(pay == nil, @"ALT-ACC validation is wrong. Wrong IBAN passed over tests");
 }
 
 @end

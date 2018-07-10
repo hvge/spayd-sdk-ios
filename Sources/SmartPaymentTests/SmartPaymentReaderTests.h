@@ -18,8 +18,8 @@
  * Author: Juraj Durech <juraj@inmite.eu>
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface SmartPaymentReaderTests : SenTestCase
+@interface SmartPaymentReaderTests : XCTestCase
 
 @end

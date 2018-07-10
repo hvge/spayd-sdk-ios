@@ -34,6 +34,12 @@
 
 @property (nonatomic, assign) BOOL isValid;
 
+// Payment type - Computed property based on parameters and header.
+@property (nonatomic) SmartPaymentType type;
+
+// Protocol header: v1.1 defines SCD and SPD.
+@property (nonatomic, strong) NSString * header;
+
 // Version property keeps version of SmartPayment. If not set during the string building then default value is used.
 @property (nonatomic, strong) NSString * version;
 
@@ -69,6 +75,15 @@
 
 // "NTA" attribute
 @property (nonatomic, strong) NSString * notificationAddress;
+
+// "FRQ" attribute
+@property (nonatomic, strong) NSString * frequency;
+
+// "DL" attribute
+@property (nonatomic, strong) NSDate * lastDate;
+
+// "DH" attribute
+@property (nonatomic, strong) NSNumber * deathHandling;
 
 // Returns all accounts in one array.
 - (NSArray*) allAccounts;
