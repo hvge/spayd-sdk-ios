@@ -92,8 +92,14 @@
 	_errors = [NSMutableArray array];
 	
 	[values enumerateKeysAndObjectsUsingBlock:^(NSString * tag, NSString * value, BOOL *stop) {
-		
-		NSArray * entry = [definition objectForKey:tag];
+
+        NSArray * entry = [definition objectForKey:tag];
+
+        if ([tag isEqualToString:kSmartPaymentKey_Header]) {
+            [translatedValues setObject:value forKey:tag];
+            return;
+        }
+
 		if (entry) {
 			SmartPaymentValueType valueType = [[entry objectAtIndex:0] intValue];
 			NSArray * params = entry.count > 1 ? [entry objectAtIndex:1] : nil;
@@ -153,6 +159,14 @@
 					}
 					break;
 				}
+
+                case SmartPaymentValueType_Frequency:
+                    result = [self validateFrequency:value error:&error];
+                    break;
+
+                case SmartPaymentValueType_Boolean:
+                    result = [self validateBoolean:value error:&error];
+                    break;
 					
 				default:
 					NSLog(@"SmartPaymentValidator: Unsupported value type %d", valueType);
@@ -301,7 +315,7 @@
 	if (index == NSNotFound) {
 		return nil;
 	}
-	return [NSNumber numberWithInt:index + 1];
+	return [NSNumber numberWithInt:(int)index + 1];
 }
 
 - (NSDate*) validateDate:(NSString*)value params:(NSArray*)params error:(NSString**)error
@@ -311,6 +325,27 @@
 		return nil;
 	}
 	return [_dateFormatter dateFromString:value];
+}
+
+- (NSString *)validateFrequency:(NSString *)rawString error:(NSString **)error {
+
+    NSString *uppercasedString = [rawString uppercaseString];
+    NSArray *validFrequencies = @[
+                                  @"1D",
+                                  @"1M",
+                                  @"3M",
+                                  @"6M",
+                                  @"1Y"
+                                  ];
+    if ([validFrequencies containsObject:uppercasedString]) {
+        return uppercasedString;
+    } else {
+        return nil;
+    }
+}
+
+- (NSNumber *)validateBoolean:(NSString *)rawValue error:(NSString **)error {
+    return [rawValue integerValue] == 0 ? @(0) : @(1);
 }
 
 @end

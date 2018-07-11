@@ -178,16 +178,16 @@
 {
 	IBANValidator * validator = [[IBANValidator alloc] init];
 	IBANValidationResult result = [validator validateElectronicIBAN:@"GB82WEST12345698765432"];
-	STAssertTrue(result == IBANValidation_OK, @"Basic IBAN Test failed");
+	XCTAssertTrue(result == IBANValidation_OK, @"Basic IBAN Test failed");
 	
 	result = [validator validateElectronicIBAN:@"XX4539487534957349587"];
-	STAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
+	XCTAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
 	
 	result = [validator validateElectronicIBAN:@"CZ650800000019200014539"];
-	STAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
+	XCTAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
 
 	result = [validator validateElectronicIBAN:@"CZ6508001000192000145399"];
-	STAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
+	XCTAssertTrue(result == IBANValidation_Error, @"Basic IBAN Test failed");
 }
 
 - (void) testCountryIBANs
@@ -195,7 +195,7 @@
 	IBANValidator * validator = [[IBANValidator alloc] init];
 	for (NSString * iban in _testIBANs) {
 		IBANValidationResult result = [validator validateElectronicIBAN:iban];
-		STAssertTrue(result == IBANValidation_OK, @"Test for IBAN %@ failed", iban);
+		XCTAssertTrue(result == IBANValidation_OK, @"Test for IBAN %@ failed", iban);
 	}
 	
 	NSLog(@"Country Test END");
