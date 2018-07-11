@@ -116,7 +116,8 @@
 		[self setupError:SmartPaymentError_NotAPayment str:@"String doesn't contain valid SmartPayment descriptor."];
 		return nil;
 	}
-	if (![[keyValues objectAtIndex:0] isEqualToString:kSmartPayment_Header]) {
+    NSString *header = keyValues.firstObject;
+	if (![header isEqualToString:kSmartPayment_Header] && ![header isEqualToString:kSmartDebit_Header]) {
 		// Not a Smart Payment string
 		[self setupError:SmartPaymentError_NotAPayment str:@"String doesn't contain valid SmartPayment descriptor."];
 		return nil;
@@ -129,6 +130,9 @@
 	
 	NSMutableDictionary * resultDictionary = [NSMutableDictionary dictionaryWithCapacity:keyValues.count];
 	NSUInteger index = 2, count = keyValues.count;
+
+    resultDictionary[kSmartPaymentKey_Header] = header;
+
 	while (index < count)
 	{
 		NSString * kv = [keyValues objectAtIndex:index++];
@@ -139,8 +143,8 @@
 			[self setupError:SmartPaymentError_NotAPayment str:[NSString stringWithFormat:@"Unknown token '%@'", kv]];
 			return nil;
 		}
-		NSString * key = [kv substringToIndex:colonRange.location];
-		NSString * value = [kv substringFromIndex:colonRange.location + 1];
+		NSString * key = [[kv substringToIndex:colonRange.location] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+		NSString * value = [[kv substringFromIndex:colonRange.location + 1] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
 		
 		// Validate key
 		if (![key hasPrefix:@"X-"] && ![_knownTags containsObject:key]) {
@@ -160,8 +164,8 @@
 	if (![self validateCRC32:resultDictionary code:code]) {
 		resultDictionary = nil;
 	}
-	
-	return resultDictionary;
+
+    return resultDictionary;
 }
 
 
