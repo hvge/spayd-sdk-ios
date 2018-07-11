@@ -45,30 +45,30 @@
 {
 	NSString * qrcode = _validCode1;
 	SmartPayment * payment = [_reader createPaymentFromCode:qrcode];
-	STAssertTrue(payment != nil, @"CZ: SmartPaymentCZ creation failed");
+	XCTAssertTrue(payment != nil, @"CZ: SmartPaymentCZ creation failed");
 	if (payment) {
 		SmartPaymentCZ * pay = [payment isKindOfClass:[SmartPaymentCZ class]] ? (SmartPaymentCZ*)payment : nil;
 		
-		STAssertTrue(pay != nil, @"CZ: Wrong payment object type");
+		XCTAssertTrue(pay != nil, @"CZ: Wrong payment object type");
 		
-		STAssertTrue([pay.specificSymbol isEqualToString:@"00123"],			@"CZ: Wrong Specific Symbol");
-		STAssertTrue([pay.variableSymbol isEqualToString:@"1234567890"],	@"CZ: Wrong Variable Symbol");
-		STAssertTrue([pay.constantSymbol isEqualToString:@"0200"],			@"CZ: Wrong Constant Symbol");
-		STAssertTrue([pay.repeatDaysCount isEqualToNumber:@7],				@"CZ: Wrong Repeat days count");
-		STAssertTrue([pay.customIdentifier isEqualToString:@"0x336699"],	@"CZ: Wrong custom identifier");
-		STAssertTrue([pay.customURL isEqualToString:@"HTTP://GOOGLE.COM"],	@"CZ: Wrong custom URL");
+		XCTAssertTrue([pay.specificSymbol isEqualToString:@"00123"],			@"CZ: Wrong Specific Symbol");
+		XCTAssertTrue([pay.variableSymbol isEqualToString:@"1234567890"],	@"CZ: Wrong Variable Symbol");
+		XCTAssertTrue([pay.constantSymbol isEqualToString:@"0200"],			@"CZ: Wrong Constant Symbol");
+		XCTAssertTrue([pay.repeatDaysCount isEqualToNumber:@7],				@"CZ: Wrong Repeat days count");
+		XCTAssertTrue([pay.customIdentifier isEqualToString:@"0x336699"],	@"CZ: Wrong custom identifier");
+		XCTAssertTrue([pay.customURL isEqualToString:@"HTTP://GOOGLE.COM"],	@"CZ: Wrong custom URL");
 	}
 	
 	payment = [_reader createPaymentFromCode:_validCode2];
-	STAssertTrue(payment != nil, @"CZ: SmartPaymentCZ creation failed");
+	XCTAssertTrue(payment != nil, @"CZ: SmartPaymentCZ creation failed");
 	if (payment) {
 		SmartPaymentCZ * pay = [payment isKindOfClass:[SmartPaymentCZ class]] ? (SmartPaymentCZ*)payment : nil;
 		NSArray * accounts = [payment allAccountsForCountry:@"CZ"];
-		STAssertTrue(accounts.count == 3, @"CZ: wrong country filter");
+		XCTAssertTrue(accounts.count == 3, @"CZ: wrong country filter");
 		accounts = [pay czAllAccountsWithBankCode:@"5500"];
-		STAssertTrue(accounts.count == 1, @"CZ: wrong bank filter");
+		XCTAssertTrue(accounts.count == 1, @"CZ: wrong bank filter");
 		accounts = [pay czAllAccountsWithBankCode:@"0800"];
-		STAssertTrue(accounts.count == 2, @"CZ: wrong bank filter");
+		XCTAssertTrue(accounts.count == 2, @"CZ: wrong bank filter");
 
 	}
 }
@@ -77,34 +77,34 @@
 {	
 	SmartPayment * payment = nil;
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-VS:12345678901"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-VS length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-VS length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-VS:xx"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-VS number test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-VS number test");
 	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-SS:12345678901"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-SS length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-SS length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-SS:xx"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-SS number test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-SS number test");
 
 	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-KS:12345678901"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-KS length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-KS length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-KS:xx"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-KS number test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-KS number test");
 	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-ID:123456789012345678901"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-ID length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-ID length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-ID:xx"];
-	STAssertTrue(payment != nil, @"CZ: wrong X-ID number test");
+	XCTAssertTrue(payment != nil, @"CZ: wrong X-ID number test");
 	
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:0"];
-	STAssertTrue(payment != nil, @"CZ: wrong X-PER length test");
+	XCTAssertTrue(payment != nil, @"CZ: wrong X-PER length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:-1"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:31"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-PER length test");
 	payment = [_reader createPaymentFromCode:@"SPD*1.0*ACC:CZ5855000000001265098001*X-PER:xx"];
-	STAssertTrue(payment == nil, @"CZ: wrong X-PER number test");
+	XCTAssertTrue(payment == nil, @"CZ: wrong X-PER number test");
 }
 
 @end

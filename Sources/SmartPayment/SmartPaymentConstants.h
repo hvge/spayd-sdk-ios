@@ -26,8 +26,12 @@
 // Header & Supported version
 
 extern NSString * const kSmartPayment_Header;
+extern NSString * const kSmartDebit_Header;
 extern NSString * const kSmartPayment_Version;
 
+// Keys
+
+extern NSString * const kSmartPaymentKey_Header;
 
 // Default TAGS
 
@@ -43,6 +47,9 @@ extern NSString * const kSmartPaymentTag_MessageForReceiver;	// MSG
 extern NSString * const kSmartPaymentTag_NotificationChannel;	// NT
 extern NSString * const kSmartPaymentTag_NotificationAddress;	// NTA
 extern NSString * const kSmartPaymentTag_CRC32;					// CRC32
+extern NSString * const kSmartPaymentTag_LastDate;				// DL
+extern NSString * const kSmartPaymentTag_Frequency;				// FRQ
+extern NSString * const kSmartPaymentTag_DeathHandling;			// DH
 
 extern NSSet *   SmartPayment_GetKnownTags();
 extern NSArray * SmartPayment_GetRecommendedTagsOrder();
@@ -83,8 +90,15 @@ typedef enum {
 	SmartPaymentValueType_RegExp,		// regular expression for validation, the paramter contains regexp
 	SmartPaymentValueType_Enum,			// value must be one from strings array
 	SmartPaymentValueType_Date,			// date
+	SmartPaymentValueType_Frequency,	// standing order frequency
+	SmartPaymentValueType_Boolean		// boolean
 } SmartPaymentValueType;
 
+typedef enum {
+	SmartPaymentTypeSinglePayment,
+	SmartPaymentTypeStandingOrder,
+	SmartPaymentTypeDirectDebit,
+} SmartPaymentType;
 
 #define SPD_TAG(tagName, valueType)										\
 																		\
