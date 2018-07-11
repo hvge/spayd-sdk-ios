@@ -81,6 +81,9 @@
 			SPD_TAG_P( kSmartPaymentTag_CRC32,					SmartPaymentValueType_String,	@8, @8)
 			SPD_TAG_P( kSmartPaymentTag_NotificationChannel,	SmartPaymentValueType_Enum,		@"P", @"E")
 			SPD_TAG_P( kSmartPaymentTag_NotificationAddress,	SmartPaymentValueType_String,	@1,  @320, @(TRUE))
+			SPD_TAG  ( kSmartPaymentTag_LastDate,				SmartPaymentValueType_Date)
+			SPD_TAG  ( kSmartPaymentTag_Frequency,				SmartPaymentValueType_Frequency)
+			SPD_TAG_P( kSmartPaymentTag_DeathHandling,			SmartPaymentValueType_Number,	@0,	@1)
 			nil];
 }
 
@@ -101,6 +104,7 @@
 
 - (void) readPaymentFromDictionary:(NSDictionary *)dictionary
 {
+	_header					= [dictionary objectForKey:kSmartPaymentKey_Header];
 	_account				= [dictionary objectForKey:kSmartPaymentTag_Account];
 	_alternateAccounts		= [dictionary objectForKey:kSmartPaymentTag_AlternateAccounts];
 	_amount					= [dictionary objectForKey:kSmartPaymentTag_Amount];
@@ -110,6 +114,10 @@
 	_dueDate				= [dictionary objectForKey:kSmartPaymentTag_DueDate];
 	_paymentType			= [dictionary objectForKey:kSmartPaymentTag_PaymentType];
 	_messageForReceiver		= [dictionary objectForKey:kSmartPaymentTag_MessageForReceiver];
+	_frequency				= [dictionary objectForKey:kSmartPaymentTag_Frequency];
+	_lastDate				= [dictionary objectForKey:kSmartPaymentTag_LastDate];
+	_deathHandling			= [dictionary objectForKey:kSmartPaymentTag_DeathHandling];
+
 	id value = [dictionary objectForKey:kSmartPaymentTag_NotificationChannel];
 	if (value) {
 		_notificationChannel = [value intValue];
@@ -132,7 +140,10 @@
 	[dictionary setOptionalObject:_dueDate forKey:kSmartPaymentTag_DueDate];
 	[dictionary setOptionalObject:_paymentType forKey:kSmartPaymentTag_PaymentType];
 	[dictionary setOptionalObject:_messageForReceiver forKey:kSmartPaymentTag_MessageForReceiver];
-	
+	[dictionary setOptionalObject:_frequency forKey:kSmartPaymentTag_Frequency];
+	[dictionary setOptionalObject:_lastDate forKey:kSmartPaymentTag_LastDate];
+	[dictionary setOptionalObject:_deathHandling forKey:kSmartPaymentTag_DeathHandling];
+
 	if (_notificationChannel != SmartPaymentNotificationChannel_None) {
 		[dictionary setOptionalObject:@(_notificationChannel) forKey:kSmartPaymentTag_NotificationChannel];
 		[dictionary setOptionalObject:_notificationAddress forKey:kSmartPaymentTag_NotificationAddress];
@@ -158,8 +169,26 @@
 	payment.messageForReceiver = _messageForReceiver;
 	payment.notificationChannel = _notificationChannel;
 	payment.notificationAddress = _notificationAddress;
+	payment.frequency = _frequency;
+	payment.lastDate = _lastDate;
+	payment.deathHandling = _deathHandling;
+	payment.header = _header;
 	
 	return payment;
+}
+
+#pragma mark - Computed properties
+
+- (SmartPaymentType)type {
+	if ([_header isEqualToString:kSmartPayment_Header]) {
+		if (_frequency != nil) {
+			return SmartPaymentTypeStandingOrder;
+		} else {
+			return SmartPaymentTypeSinglePayment;
+		}
+	} else {
+		return SmartPaymentTypeDirectDebit;
+	}
 }
 
 @end
