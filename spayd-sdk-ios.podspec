@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
   # s.source_files = 'Sources/SmartPayment/*'
 
   s.subspec 'SmartPayment' do |ss|
-    ss.source_files  = "Sources/SmartPayment/*"
+    ss.source_files  = "Sources/SmartPayment/**/*"
   end
   
   # s.resource_bundles = {
