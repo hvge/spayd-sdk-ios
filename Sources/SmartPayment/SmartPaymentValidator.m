@@ -301,7 +301,7 @@
 	if (index == NSNotFound) {
 		return nil;
 	}
-	return [NSNumber numberWithInt:index + 1];
+	return [NSNumber numberWithInt:(int)index + 1];
 }
 
 - (NSDate*) validateDate:(NSString*)value params:(NSArray*)params error:(NSString**)error
