@@ -22,8 +22,13 @@
 
 // Header & Version
 
-NSString * const kSmartPayment_Header  = @"SPD";
-NSString * const kSmartPayment_Version = @"1.0";
+NSString * const kSmartPayment_Header	= @"SPD";
+NSString * const kSmartDebit_Header		= @"SCD";
+NSString * const kSmartPayment_Version	= @"1.0";
+
+// Keys
+
+NSString * const kSmartPaymentKey_Header = @"HEADER";
 
 // TAGS
 
@@ -39,6 +44,10 @@ NSString * const kSmartPaymentTag_MessageForReceiver	= @"MSG";
 NSString * const kSmartPaymentTag_NotificationChannel	= @"NT";
 NSString * const kSmartPaymentTag_NotificationAddress	= @"NTA";
 NSString * const kSmartPaymentTag_CRC32					= @"CRC32";
+NSString * const kSmartPaymentTag_LastDate				= @"DL";
+NSString * const kSmartPaymentTag_Frequency				= @"FRQ";
+NSString * const kSmartPaymentTag_DeathHandling			= @"DH";
+
 
 NSArray * SmartPayment_GetRecommendedTagsOrder()
 {
@@ -55,6 +64,9 @@ NSArray * SmartPayment_GetRecommendedTagsOrder()
 			kSmartPaymentTag_NotificationChannel,
 			kSmartPaymentTag_NotificationAddress,
 			kSmartPaymentTag_CRC32,
+			kSmartPaymentTag_LastDate,
+			kSmartPaymentTag_Frequency,
+			kSmartPaymentTag_DeathHandling,
 			nil];
 }
 

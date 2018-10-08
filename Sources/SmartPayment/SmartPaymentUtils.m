@@ -60,7 +60,7 @@ static inline NSUInteger IntegerValue(unichar uc)
 	}
 	long weight = 1;
 	long sum = 0;
-	for (int k = number.length - 1; k >= 0; k--) {
+	for (int k = (int)number.length - 1; k >= 0; k--) {
 		int character = [number characterAtIndex:k] - '0';
 		if (character < 0 || character > 9) {
 			//NSLog(@"Invalid character in account number %@", number);
@@ -78,11 +78,11 @@ static inline NSUInteger IntegerValue(unichar uc)
 + (NSString*) crc32:(NSString*)str
 {
 	const char * utf8str = [str UTF8String];
-	UInt32 crc = crc32(0L, Z_NULL, 0);
+	UInt32 crc = (UInt32)crc32(0L, Z_NULL, 0);
 	if (utf8str) {
-		crc = crc32(crc, (const Bytef*)utf8str, strlen(utf8str));
+		crc = (UInt32)crc32(crc, (const Bytef*)utf8str, (uInt)strlen(utf8str));
 	}
-	return [NSString stringWithFormat:@"%08lX", crc];
+	return [NSString stringWithFormat:@"%08X", (unsigned int)crc];
 }
 
 /*
