@@ -2,6 +2,8 @@
 
 The **SmartPayment** project is a full iOS implementation of [Smart Payment Descriptor](http://qr-platba.cz) which is a standard for QR code payments on mobile devices in Czech Republic. If you're interested in full specification, please go to http://qr-platba.cz website.
 
+⚠️ **Note that this repository is no longer maintaned** ⚠️ Please, go to [ma-myair/spayd-sdk-ios](https://github.com/ma-myair/spayd-sdk-ios) to get a more recent copy of the project. Thanks.
+
 ## Library Features
 
 ### License
