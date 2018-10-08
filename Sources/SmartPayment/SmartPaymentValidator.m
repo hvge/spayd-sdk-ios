@@ -302,7 +302,7 @@
 
 - (NSString*) validateRegexp:(NSString*)value params:(NSArray*)params error:(NSString**)error
 {
-	IMT_ASSERT(NO, @"validateRegexp is not implemented yet");
+	NSAssert(NO, @"validateRegexp is not implemented yet");
 	return nil;
 }
 

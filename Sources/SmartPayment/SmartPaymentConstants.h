@@ -116,11 +116,4 @@ typedef enum {
 	],																	\
 	tagName,
 
-
-// Inmite specific. Move to project's configuration later...
-
-#if !defined(IMT_ASSERT)
-#define IMT_ASSERT NSAssert
-#endif
-
 #endif //__SmartPaymentConstants_m_defined__
